@@ -2,6 +2,11 @@
     import ModalCreateProduct from './ModalCreateProduct.vue';
 
     export default{
+        props: {
+            getProducts: {
+                type: Function
+            }
+        },  
         components: {
             ModalCreateProduct
         },
@@ -51,6 +56,7 @@
                     if(data.status !== 200){
                         return alert(data.message)
                     }
+                    this.getProducts()
                 })
                 .catch(err => console.log('err', err));
 
@@ -104,10 +110,18 @@
         border-radius: .7rem;
         border: none;
         font-size: 1.7rem;
+        transition: color 1s;
         img{
             width: 1.4rem;
             height: 1.4rem;                
         }
+    }
+    .show:hover{
+        background-color: white;
+        border: 1px solid $bgColor;
+        font-size: 2rem;
+        color: $bgColor;
+        transition: color;
     }
 
     form{

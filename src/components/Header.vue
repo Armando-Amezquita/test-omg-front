@@ -5,6 +5,9 @@
         props: {
             user: {
                 type: Object
+            },
+            getProducts: {
+                type: Function
             }
         },
         data() {
@@ -36,10 +39,10 @@
         </form>
         <ul>
             <li>
-                <CreateNewProduct /> 
+                <CreateNewProduct :getProducts="getProducts" /> 
             </li>
             <li><img src="@/assets/icons/activo.png" alt="notification"/></li>
-            <li>{{ user.name? user.name : "name" }}</li>
+            <li class="name"> {{ user.name? user.name : "name" }}</li>
             <li>
                 <img @click="toogle" class="profile" src="@/assets/icons/usuario.png" alt="User" />
                 <div class="sub-menu-wrap" v-show="show">
@@ -114,6 +117,9 @@ nav{
                     }
                 }
             }
+        }
+        .name{
+            color: $bgColor;
         }
 
         li{

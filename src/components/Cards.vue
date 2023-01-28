@@ -19,7 +19,6 @@
         },
         methods: {
             toogle(){
-                console.log('click')
                 this.show = !this.show
             }
         },
@@ -30,12 +29,35 @@
     <div v-if="products.length > 1">
         <article class="card" v-for="prod in products" :key="prod.id">
             <img src="@/assets/pexels-cottonbro-studio-6804597.jpg" alt="Imagen">
+            <div class="sub-menu-wrap" v-show="show">
+                <div class="sub-menu">
+                    <div class="user-info">
+                        <table>
+                            <tr class="edit-delete" >
+                                <th > 
+                                    <img src="@/assets/icons/editar-texto.png" alt="Edit">
+                                </th>
+                                <th>
+                                    <p @click="logout">Edit</p>
+                                </th>
+                            </tr>
+                            <hr>
+                            <tr class="edit-delete">
+                                <th>
+                                    <img src="@/assets/icons/garbage.png" alt="Delete">
+                                </th>
+                                <td> 
+                                    <p @click="logout">Delete</p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
             <div>
                 <p class="name">{{ prod.name }}</p>
-                <img src="@/assets/icons/mas1.png" alt="" @click="toogle" />
-                    <transition name="fade">
-                        <Modal class="modal" v-show="show"/>
-                    </transition>
+                <img src="@/assets/icons/mas1.png" alt="edit/delete" @click="toogle" />
+
             </div>
                 <p class="price"> $ {{ prod.value }}</p>
             <div class="time">
@@ -165,27 +187,42 @@
             color: $bgColor;
         }   
     }
-    // .sub-menu-wrap{
-    //     position: absolute;
-    //     top: 16rem;
-    //     right: 1rem;
-    //     width: 16rem;
-    //     color: #248AFF;
-    //         .sub-menu{
-    //             background-color: $darkGray;
-    //             border-radius: .5rem;
-    //             min-height: 4rem;
-    //             padding: 1rem;
-    //             .user-info{
-    //                 p{
-    //                     transition: transform 0.5s;
-    //                     margin-bottom: 1rem;
-    //                 }
-    //                 p:hover{
-    //                     transform: translateX(5px);
-    //                     cursor: pointer;
-    //                 }
-    //             }
-    //         }
-    //     }
+    .sub-menu-wrap{
+        position: absolute;
+        top: 16rem;
+        right: 1rem;
+        width: 16rem;
+        color: #248AFF;
+        z-index: 3;
+            .sub-menu{
+                background-color: $lowGray;
+                border-radius: .5rem;
+                min-height: 4rem;
+                // padding: 1rem;
+                .user-info{
+                    padding: 0;
+                    hr{
+                        margin: .7rem 0;
+                    }
+                    .edit-delete{
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center; 
+                        width: 100%;   
+                        th{
+                            margin-right: 1.5rem;
+                        }
+                    }
+                    p{
+                        color: $darkGray;
+                        transition: transform 0.5s;
+                        margin-bottom: 1rem;
+                    }
+                    p:hover{
+                        transform: translateX(5px);
+                        cursor: pointer;
+                    }
+                }
+            }
+        }
 </style>

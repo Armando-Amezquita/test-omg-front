@@ -52,9 +52,9 @@
     }
 </script>
 <template>
-    <Header class="header" :user="user"> </Header>
+    <Header class="header" :user="user" :getProducts="getProducts"> </Header>
     <main>
-        <Cards :products="products" />
+        <Cards :products="products"  />
     </main>
 </template>
 
