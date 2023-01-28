@@ -1,5 +1,9 @@
 <script>
+    import ModalCreateProduct from './ModalCreateProduct.vue';
     export default {
+        components: {
+            ModalCreateProduct
+        },  
         props: {
             name: {
                 type: String
@@ -24,12 +28,15 @@
             return {
                 show: false,
                 token: '',
-                _id: ''
+                _id: '',
+                showModal: false,
+                namedb: "",
+                valuedb: "",
+                ratingdb: "",
             }
         },
         methods: {
             toogle(){
-                console.log()
                 this.show = !this.show
             },
             eliminar(){
@@ -57,7 +64,41 @@
                     this.getProducts()
                 })
                 .catch(err => console.log('err', err));
-            }
+            },
+
+            update(){
+                let updateProduct = {
+                    id: this.id,
+                    name: this.name,
+                    value: this.valuedb,
+                    rating: this.ratingdb,
+                }
+                this.token = JSON.parse(localStorage.getItem('user')).token;
+                // fetch('http://localhost:3002/api/products/update', {
+                fetch('https://test-omg-api-production.up.railway.app/api/products/update', {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'token': this.token,
+                        'apikey': "admin"
+                    },
+                    body: JSON.stringify(updateProduct)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if(data.status !== 200){
+                        return alert(data.message)
+                    }
+                    this.getProducts()
+                })
+                .catch(err => console.log('err', err));
+
+                this.showModal = !this.showModal; 
+            },
+            
+            close(){
+                this.showModal = false
+            },
         },
     }
 </script>
@@ -74,7 +115,23 @@
                             <img src="@/assets/icons/editar-texto.png" alt="Edit">
                         </th>
                         <th>
-                            <p @click="eliminar">Edit</p>
+                            <p @click="showModal = true">Edit</p>
+                            <div class="telep">
+                            <teleport to='#app'>
+                                <ModalCreateProduct v-show="showModal" :close="close">
+                                    <form @submit.prevent="update">
+                                        <label class="name" for="name"> Name </label>
+                                        <input v-model="namedb" type="text" name="name" id="name" placeholder="T-shirt">
+                                        <label class="valuedb" for="valuedb"> Value </label>
+                                        <input v-model="valuedb" type="number" name="valuedb" id="valuedb" placeholder="$200.0">
+                                        <label class="rating" for="rating"> Rating </label>
+                                        <input v-model="ratingdb" type="number" name="rating" id="rating" placeholder="1-5">
+                                        <button type="submit">Update</button>
+                                        
+                                    </form>
+                                </ModalCreateProduct>
+                            </teleport>
+                            </div>
                         </th>
                     </tr>
                     <hr>
@@ -167,7 +224,7 @@
         right: 1rem;
         width: 16rem;
         color: #248AFF;
-        z-index: 3;
+        z-index: 1;
         .sub-menu{
             background-color: $lowGray;
             border-radius: .5rem;
@@ -198,5 +255,53 @@
                 }
             }
         }
+    }
+    form{
+        label{
+            margin: 1rem 0 ;
+            font-size: 1.5rem;
+            color: $darkGray;
+        }
+    
+        input{
+            width: 100%;
+            height: 4rem;
+            padding: 2rem;
+            border-radius: 0.3rem;
+            border: 1px solid $lowGray;
+            outline: none;
+            margin: 1rem 0;
+        }
+
+        .container-values{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            div{
+                margin-right: 1rem;
+            }
+        }
+
+        button{
+            height: 4rem;
+            width: 100%;
+            border-radius: .7rem;
+            color: white;
+            background-color: $bgColor;
+            border: none;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-top: 2rem;
+        }
+        button:hover{
+            color: $bgColor;
+            background-color: transparent;
+            border: 1px solid $bgColor;
+            transition: .5s ease-in-out;
+        }
+    }
+    .telep{
+        position: absolute;
+        z-index: 4;
     }
 </style>
