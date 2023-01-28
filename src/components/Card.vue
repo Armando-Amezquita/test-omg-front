@@ -39,7 +39,8 @@
                 }
                 this.token = JSON.parse(localStorage.getItem('user')).token;
 
-                fetch('http://localhost:3002/api/products/delete', {
+                // fetch('http://localhost:3002/api/products/delete', {
+                fetch('https://test-omg-api-production.up.railway.app/api/products/delete', {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
