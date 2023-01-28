@@ -46,7 +46,7 @@
                 .catch(err => console.log('err', err))
             },
             login(){
-                this.$router.push('/login')
+                this.$router.push('/')
             }
         }
     }
