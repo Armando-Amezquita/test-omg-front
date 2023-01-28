@@ -15,12 +15,16 @@
             },
             id: {
                 type: String
+            },
+            getProducts: {
+                type: Function
             }
         },
         data() {
             return {
                 show: false,
-                token: ''
+                token: '',
+                _id: ''
             }
         },
         methods: {
@@ -29,17 +33,20 @@
                 this.show = !this.show
             },
             eliminar(){
-                console.log('$this.route', this.$route.params)
+                
+                let obj = {
+                    id: this.id
+                }
                 this.token = JSON.parse(localStorage.getItem('user')).token;
 
-                fetch('http://localhost:3002/api/products/:id', {
+                fetch('http://localhost:3002/api/products/delete', {
                     method: 'DELETE',
                     headers: {
                         'Content-Type': 'application/json',
                         'token': this.token,
                         'apikey': "admin"
                     },
-                    params: JSON.stringify(this.$route.params.id)
+                    body: JSON.stringify(obj)
                 })
                 .then(response => response.json())
                 .then(data => {
@@ -49,8 +56,6 @@
                     this.getProducts()
                 })
                 .catch(err => console.log('err', err));
-                console.log('click')
-                console.log(this.id)
             }
         },
     }

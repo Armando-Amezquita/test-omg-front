@@ -12,6 +12,9 @@
             products: {
                 type: Array,
                 default: () => []
+            },
+            getProducts: {
+                type: Function,
             }
         },
     }
@@ -20,15 +23,16 @@
 <template>
     <div v-if="products.length > 1">
         <article class="card" v-for="prod in products" :key="prod.id">
-            <router-link :to="`/dashboard/${prod._id}`">
+            <!-- <router-link :to="`/dashboard/${prod._id}`"> -->
                 <Card 
                 :id="prod._id"
                 :name="prod.name"
                 :value="prod.value"
                 :createdAt="prod.createdAt"
                 :rating="prod.rating"
+                :getProducts="getProducts"
                 />
-            </router-link>
+            <!-- </router-link> -->
         </article>
     </div>
     <div v-else class="title-2">

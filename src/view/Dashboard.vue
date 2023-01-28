@@ -54,7 +54,7 @@
 <template>
     <Header class="header" :user="user" :getProducts="getProducts"> </Header>
     <main>
-        <Cards :products="products"  />
+        <Cards :products="products" :getProducts="getProducts"  />
     </main>
 </template>
 
