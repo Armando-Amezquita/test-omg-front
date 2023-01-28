@@ -26,7 +26,8 @@
                     phone: this.phone
                 }
 
-                fetch('http://localhost:3002/api/auth/signup', {
+                // fetch('http://localhost:3002/api/auth/signup', {
+                fetch('https://test-omg-api-production.up.railway.app/auth/signup/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

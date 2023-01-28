@@ -27,7 +27,8 @@
                     password: this.password,
                 }
 
-                fetch('http://localhost:3002/api/auth/login', {
+                // fetch('http://localhost:3002/api/auth/login', {
+                fetch('https://test-omg-api-production.up.railway.app/api/auth/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -41,7 +42,6 @@
                     }
                     else{
                         localStorage.setItem("user", JSON.stringify(data.response));
-                        // localStorage.getItem('user') => convertir a Json
                         return this.navigateRedirect()
                     }
                 })

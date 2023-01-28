@@ -36,7 +36,8 @@
                     rating: this.rating,
                     type: this.type,
                 }
-                fetch('http://localhost:3002/api/products/', {
+                // fetch('http://localhost:3002/api/products/', {
+                fetch('https://test-omg-api-production.up.railway.app/api/products/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

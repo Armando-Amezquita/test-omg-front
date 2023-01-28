@@ -26,7 +26,8 @@
         },
         methods: {
             getProducts(){
-                fetch('http://localhost:3002/api/products/', {
+                // fetch('http://localhost:3002/api/products/', {
+                fetch('https://test-omg-api-production.up.railway.app/api/products/', {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
