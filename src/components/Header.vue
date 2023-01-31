@@ -24,7 +24,6 @@
             },
             logout(){
                 localStorage.clear()
-                this.$router.push('/');
             }
         }
     }
@@ -48,7 +47,9 @@
                 <div class="sub-menu-wrap" v-show="show">
                     <div class="sub-menu">
                         <div class="user-info">
-                            <p @click="logout">Logout</p>
+                            <router-link to="/">
+                                <p @click="logout">Logout</p>
+                            </router-link>
                             <hr>
                             <p>Profile</p>
                         </div>

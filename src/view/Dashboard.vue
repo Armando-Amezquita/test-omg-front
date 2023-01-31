@@ -41,6 +41,7 @@
                         return alert(data.message)
                     }
                     else{
+                        console.log('data', data)
                         this.products = data.products
                     }
                 })

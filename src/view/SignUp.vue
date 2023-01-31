@@ -15,7 +15,7 @@
         },
         methods: {
             navigateRedirect(){
-                this.$router.push('/login')
+                this.$router.push('/')
             },  
             createUser(){
                 let newUser = {

@@ -4,8 +4,12 @@
             <ul>
                 <li>No employer account yet?</li>
                 <li>
-                    <button type="button"> 
-                        <router-link class="link" to="/signup">Register</router-link>
+                    <button type="submit"> 
+                        
+                        <!-- <router-link :to="`/`"> -->
+                            
+                        <!-- <router-link to="/signup">Signup</router-link> -->
+                        <router-link to="/signup">Register</router-link>
                     </button>
                 </li>
             </ul>

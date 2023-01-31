@@ -21,7 +21,7 @@
 </script>
 
 <template>
-    <div v-if="products.length > 1">
+    <div v-if="products.length > 0">
         <article class="card" v-for="prod in products" :key="prod.id">
             <!-- <router-link :to="`/dashboard/${prod._id}`"> -->
                 <Card 
@@ -36,7 +36,7 @@
         </article>
     </div>
     <div v-else class="title-2">
-        <p>Loading...</p>
+        <p>Create a new product...</p>
     </div>
 </template>
 
