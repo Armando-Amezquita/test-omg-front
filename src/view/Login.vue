@@ -1,8 +1,10 @@
 <script >
     import HeaderLogin from '../components/HeaderLogin.vue';
+    import Button from '../components/Button.vue';
     export default {
         components: {
-            HeaderLogin
+            HeaderLogin,
+            Button
         },
         data() {
             return {
@@ -66,13 +68,13 @@
                 <input v-model="email" type="text" name="email" id="email" placeholder="yourname@gmail.com">
                 
                 <label class="password" for="password"> Password <span>Forgot password?</span></label>
-                <input v-model="password" type="text" name="password" id="password" placeholder="SmallTigger21">
+                <input v-model="password" type="password" name="password" id="password" placeholder="SmallTigger21">
 
                 <div>
                     <input v-model="check" class="check" type="checkbox" name="check" id="check">
                     <label for="check">Keep me signed in</label>
                 </div>
-                <button type="submit">Login</button>
+                <Button> Login </Button>
 
                 <div>
                     <p>Not a member?</p>
@@ -93,12 +95,13 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        background-color: $white;
         .left{
             padding: 3rem;
             width: 30rem;
             min-height: 100vh;
             background-color: $bgColor;
-            color: white;
+            color: $white;
 
             h1{
                 margin-top: 23rem;
@@ -125,6 +128,8 @@
                 flex-direction: column;
                 .title-form{
                     font-size: 2rem;
+                    font-weight: bold;
+                    color: $darkBlue;
                 }
 
                 label{
@@ -144,20 +149,10 @@
                     width: 100%;
                     height: 4rem;
                     padding: 2rem;
-                    border-radius: 0.2rem;
-                    border: 1px solid $lowGray;
+                    border-radius: 0.6rem;
+                    border: 1px solid $darkGray;
                     outline: none;
-                }
-
-                button{
-                    height: 4rem;
-                    widows: 100%;
-                    background-color: $bgColor;
-                    color: white;
-                    border-radius: .7rem;
-                    border: none;
-                    font-size: 2rem;
-                    font-weight: bold;
+                    background-color: $white;
                 }
 
                 div{

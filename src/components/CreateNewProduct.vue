@@ -100,8 +100,7 @@
 
     @import '@/assets/styles.scss'; 
     .show{
-        display: flex;
-        align-items: center;
+        @extend .display_Flex;
         justify-content: space-evenly;
         height: 3rem;
         width: 10rem;
@@ -147,9 +146,7 @@
         }
 
         .container-values{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            @extend .display_Flex;
             div{
                 margin-right: 1rem;
             }

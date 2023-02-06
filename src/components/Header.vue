@@ -65,11 +65,9 @@
 @import '@/assets/styles.scss';  
 
 nav{
+    @extend .display_Flex;
     width: 100%;
     height: 6rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     padding: 1rem 4rem;
     // box-shadow: 0px 20px 39px 20px rgba(0,0,0,0.62);
     form{
@@ -89,10 +87,8 @@ nav{
     }
     
     ul{
+        @extend .display_Flex;
         width: 30%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
         .sub-menu-wrap{
             position: absolute;
             top: 6rem;

@@ -1,13 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Login from '../view/Login.vue';
+import NotFound from '../view/NotFound.vue';
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        { path: '/', component: Login},
-        { path: '/signup', component: () => import('../view/SignUp.vue')},
+        { path: '/', name: 'login', component: Login, alias: ['/home']},
+        { path: '/notfound', name:'notfound', component: NotFound},
+        { path: '/:catchAll(.*)', redirect: '/notfound'},
+        { path: '/signup', name:'signup', component: () => import('../view/SignUp.vue')},
         { 
             path: '/dashboard', 
+            name: 'dashboard',
             component: () => import('../view/Dashboard.vue'),
             children: [
                 {

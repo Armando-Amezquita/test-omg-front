@@ -9,9 +9,8 @@
 
     @import '../assets/styles.scss';
     div{
-        display: flex;
+        @extend .display_Flex;
         justify-content: center;
-        align-items: center;
         flex-direction: column;
         background-color: $darkGray;
         

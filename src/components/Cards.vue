@@ -50,8 +50,7 @@
         width: 100%;
 
         article{
-            display: flex;
-            justify-content: space-between;
+            @extend .display_Flex;
             flex-direction: column;
             width: 18rem;
             height: 26rem;

@@ -1,6 +1,9 @@
 $bgColor: #248AFF;
 $darkGray: #4A4844;
 $lowGray: #E5E5E5;
+$darkBlue: #181D31;
+$white: #FAF8F1;
+$black: #20262E;
 
 *{
   box-sizing: border-box;
@@ -22,4 +25,14 @@ button:hover, a:hover{
 
 li{
   list-style: none;
+}
+
+.display_Flex{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+a{
+  text-decoration: none;
 }

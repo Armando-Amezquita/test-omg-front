@@ -1,6 +1,12 @@
 <script>
     import ModalCreateProduct from './ModalCreateProduct.vue';
+    import vClickOutside from 'v-click-outside'
+    const { bind, unbind } = vClickOutside.directive
+
     export default {
+        directives: {
+            clickOutside: vClickOutside.directive
+        },
         components: {
             ModalCreateProduct
         },  
@@ -39,6 +45,12 @@
             toogle(){
                 this.show = !this.show
             },
+            onClickOutside () {
+                console.log('first')
+                if(this.show){
+                    this.show = false;
+                }
+            },
             eliminar(){
                 
                 let obj = {
@@ -74,15 +86,15 @@
                     rating: this.ratingdb,
                 }
                 this.token = JSON.parse(localStorage.getItem('user')).token;
-                // fetch('http://localhost:3002/api/products/update', {
-                fetch('https://test-omg-api-production.up.railway.app/api/products/update', {
+                fetch('http://localhost:3002/api/products/update', {
+                // fetch('https://test-omg-api-production.up.railway.app/api/products/update', {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                         'token': this.token,
                         'apikey': "admin"
                     },
-                    body: JSON.stringify(updateProduct)
+                    body: JSON.stringify({updateProduct})
                 })
                 .then(response => response.json())
                 .then(data => {
@@ -149,10 +161,11 @@
     </div>
     <div>
         <p class="name">{{ name }}</p>
-        <img src="@/assets/icons/mas1.png" alt="edit/delete" @click="toogle" />
-
+        <img v-click-outside="onClickOutside" class="edit-delete2" src="@/assets/icons/mas1.png" alt="edit/delete" @click="toogle" />
     </div>
-        <p class="price"> $ {{ value }}</p>
+
+    <p class="price"> $ {{ value }}</p>
+
     <div class="time">
         <p> 
             <span><img src="@/assets/icons/tiempo.png" alt=""></span> 
@@ -185,9 +198,7 @@
         margin-left: 2rem;
     }
     .time{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        @extend .display_Flex;
         width: 100%;
         color: $darkGray;
         .span-color{
@@ -197,9 +208,7 @@
     }
     
     div{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        @extend .display_Flex;
         width: 100%;
         padding: 1rem 2rem;
         position: relative;
@@ -220,25 +229,24 @@
 
     .sub-menu-wrap{
         position: absolute;
-        top: 16rem;
+        top: 15rem;
         right: 1rem;
         width: 16rem;
         color: #248AFF;
         z-index: 1;
         .sub-menu{
-            background-color: $lowGray;
+            background-color: white;
             border-radius: .5rem;
             min-height: 4rem;
-            // padding: 1rem;
+            border: 2px solid $lowGray;
+            box-shadow: 2px 4px 11px 0px rgb(0 0 0 / 75%);
             .user-info{
                 padding: 0;
                 hr{
                     margin: .7rem 0;
                 }
                 .edit-delete{
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center; 
+                    @extend .display_Flex; 
                     width: 100%;   
                     th{
                         margin-right: 1.5rem;
@@ -271,15 +279,6 @@
             border: 1px solid $lowGray;
             outline: none;
             margin: 1rem 0;
-        }
-
-        .container-values{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            div{
-                margin-right: 1rem;
-            }
         }
 
         button{
