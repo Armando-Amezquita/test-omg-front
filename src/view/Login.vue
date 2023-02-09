@@ -1,6 +1,8 @@
 <script >
+    import { mapActions } from 'vuex';
     import HeaderLogin from '../components/HeaderLogin.vue';
     import Button from '../components/Button.vue';
+
     export default {
         components: {
             HeaderLogin,
@@ -19,35 +21,25 @@
                 this.$router.push('/dashboard');
             }
         },
+
         methods: {
+            ...mapActions('user', ['loginDb']),
+
             navigateRedirect(){
                 this.$router.push('/dashboard')
-            },  
-            loginUser(){
-                let login = {
-                    email: this.email,
-                    password: this.password,
-                }
+            },
 
-                // fetch('http://localhost:3002/api/auth/login', {
-                fetch('https://test-omg-api-production.up.railway.app/api/auth/login', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(login)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if(data.status !== 200){
-                        return alert(data.message)
-                    }
-                    else{
-                        localStorage.setItem("user", JSON.stringify(data.response));
-                        return this.navigateRedirect()
-                    }
-                })
-                .catch(err => console.log('err', err))
+            async loginUser(){
+                let userLogin = {
+                    email: this.email,
+                    password: this.password
+                }
+                const user = await this.loginDb(userLogin);
+                if(!user.status){
+                    return alert(user.message)
+                }
+                localStorage.setItem("user", JSON.stringify(user.response));
+                return this.navigateRedirect()
             },
         }
     }
